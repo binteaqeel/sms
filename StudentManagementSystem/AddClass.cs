@@ -25,7 +25,7 @@ namespace StudentManagementSystem
         {
             try
             {
-                string conString = "Data Source=DESKTOP-0DG72N5\\SQLEXPRESS;Initial Catalog=smsCheck4;Integrated Security=True";
+                string conString = "Data Source=DESKTOP-0DG72N5\\SQLEXPRESS;Initial Catalog=sms;Integrated Security=True";
 
                 string query = "SELECT crsName FROM courses";
 
@@ -54,7 +54,7 @@ namespace StudentManagementSystem
         {
             try
             {
-                string conString = "Data Source=DESKTOP-0DG72N5\\SQLEXPRESS;Initial Catalog=smsCheck4;Integrated Security=True";
+                string conString = "Data Source=DESKTOP-0DG72N5\\SQLEXPRESS;Initial Catalog=sms;Integrated Security=True";
 
                 string query = "SELECT SemName FROM semester";
 
@@ -92,7 +92,7 @@ namespace StudentManagementSystem
             {
                 InstComboBox.Items.Clear();
 
-                string conString = "Data Source=DESKTOP-0DG72N5\\SQLEXPRESS;Initial Catalog=smsCheck4;Integrated Security=True";
+                string conString = "Data Source=DESKTOP-0DG72N5\\SQLEXPRESS;Initial Catalog=sms;Integrated Security=True";
 
                 string selectedCourse = CrsComboBox.SelectedItem.ToString();
                 string query = "SELECT i.Fname\r\nFROM instructor i\r\nJOIN InstExpertise ie ON i.id = ie.instId\r\nJOIN courses c ON ie.crsId = c.id\r\nWHERE c.crsName = @CourseName;\r\n";
@@ -138,7 +138,7 @@ namespace StudentManagementSystem
                     MessageBox.Show("Garbarrr");
                 }
 
-                string conString = "Data Source=DESKTOP-0DG72N5\\SQLEXPRESS;Initial Catalog=smsCheck4;Integrated Security=True";
+                string conString = "Data Source=DESKTOP-0DG72N5\\SQLEXPRESS;Initial Catalog=sms;Integrated Security=True";
 
                 string selectedCourse = CrsComboBox.SelectedItem.ToString();
                 string selectedInstructor = InstComboBox.SelectedItem.ToString();

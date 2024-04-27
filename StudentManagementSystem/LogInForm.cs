@@ -21,7 +21,7 @@ namespace StudentManagementSystem
 
         private void logInbtn_Click(object sender, EventArgs e)
         {
-            string conString = "Data Source=DESKTOP-0DG72N5\\SQLEXPRESS;Initial Catalog=smsCheck4;Integrated Security=True";
+            string conString = "Data Source=DESKTOP-0DG72N5\\SQLEXPRESS;Initial Catalog=sms;Integrated Security=True";
             try
             {
                 SqlConnection con = new SqlConnection(conString);
@@ -39,7 +39,6 @@ namespace StudentManagementSystem
                         {
                             Admin_Dashboard adminDashboard = new Admin_Dashboard(id);
                             adminDashboard.Show();
-                            this.Hide();
                         }
                         //else
                         //{
@@ -61,7 +60,6 @@ namespace StudentManagementSystem
                         {
                             Instructor_Dashboard instDashboard = new Instructor_Dashboard(id);
                             instDashboard.Show();
-                            this.Hide();
                         }
                         //else
                         //{
@@ -83,7 +81,6 @@ namespace StudentManagementSystem
                         {
                             Student_Dashboard stdDashboard = new Student_Dashboard(id);
                             stdDashboard.Show();
-                            this.Hide();
                         }
                         //else
                         //{

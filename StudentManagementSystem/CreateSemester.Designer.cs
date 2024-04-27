@@ -29,20 +29,24 @@
         private void InitializeComponent()
         {
             this.panel1 = new System.Windows.Forms.Panel();
-            this.label1 = new System.Windows.Forms.Label();
-            this.label2 = new System.Windows.Forms.Label();
-            this.label3 = new System.Windows.Forms.Label();
-            this.label4 = new System.Windows.Forms.Label();
-            this.SemName = new System.Windows.Forms.TextBox();
-            this.FeePerCrdHr = new System.Windows.Forms.TextBox();
-            this.noOfCrs = new System.Windows.Forms.TextBox();
             this.addSemBtn = new System.Windows.Forms.Button();
+            this.noOfCrs = new System.Windows.Forms.TextBox();
+            this.FeePerCrdHr = new System.Windows.Forms.TextBox();
+            this.SemName = new System.Windows.Forms.TextBox();
+            this.label4 = new System.Windows.Forms.Label();
+            this.label3 = new System.Windows.Forms.Label();
+            this.label2 = new System.Windows.Forms.Label();
+            this.label1 = new System.Windows.Forms.Label();
+            this.label5 = new System.Windows.Forms.Label();
+            this.passingMarks = new System.Windows.Forms.TextBox();
             this.panel1.SuspendLayout();
             this.SuspendLayout();
             // 
             // panel1
             // 
             this.panel1.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.panel1.Controls.Add(this.passingMarks);
+            this.panel1.Controls.Add(this.label5);
             this.panel1.Controls.Add(this.addSemBtn);
             this.panel1.Controls.Add(this.noOfCrs);
             this.panel1.Controls.Add(this.FeePerCrdHr);
@@ -56,32 +60,36 @@
             this.panel1.Size = new System.Drawing.Size(593, 393);
             this.panel1.TabIndex = 0;
             // 
-            // label1
+            // addSemBtn
             // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(287, 25);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(73, 13);
-            this.label1.TabIndex = 0;
-            this.label1.Text = "Add Semester";
+            this.addSemBtn.Location = new System.Drawing.Point(247, 296);
+            this.addSemBtn.Name = "addSemBtn";
+            this.addSemBtn.Size = new System.Drawing.Size(113, 23);
+            this.addSemBtn.TabIndex = 7;
+            this.addSemBtn.Text = "Add Semester";
+            this.addSemBtn.UseVisualStyleBackColor = true;
+            this.addSemBtn.Click += new System.EventHandler(this.addSemBtn_Click);
             // 
-            // label2
+            // noOfCrs
             // 
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(152, 92);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(82, 13);
-            this.label2.TabIndex = 1;
-            this.label2.Text = "Semester Name";
+            this.noOfCrs.Location = new System.Drawing.Point(344, 212);
+            this.noOfCrs.Name = "noOfCrs";
+            this.noOfCrs.Size = new System.Drawing.Size(147, 20);
+            this.noOfCrs.TabIndex = 6;
             // 
-            // label3
+            // FeePerCrdHr
             // 
-            this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(152, 152);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(105, 13);
-            this.label3.TabIndex = 2;
-            this.label3.Text = "Fees Per Credit Hour";
+            this.FeePerCrdHr.Location = new System.Drawing.Point(344, 145);
+            this.FeePerCrdHr.Name = "FeePerCrdHr";
+            this.FeePerCrdHr.Size = new System.Drawing.Size(147, 20);
+            this.FeePerCrdHr.TabIndex = 5;
+            // 
+            // SemName
+            // 
+            this.SemName.Location = new System.Drawing.Point(344, 89);
+            this.SemName.Name = "SemName";
+            this.SemName.Size = new System.Drawing.Size(147, 20);
+            this.SemName.TabIndex = 4;
             // 
             // label4
             // 
@@ -92,36 +100,48 @@
             this.label4.TabIndex = 3;
             this.label4.Text = "No. Of Courses Required To Register";
             // 
-            // SemName
+            // label3
             // 
-            this.SemName.Location = new System.Drawing.Point(344, 89);
-            this.SemName.Name = "SemName";
-            this.SemName.Size = new System.Drawing.Size(147, 20);
-            this.SemName.TabIndex = 4;
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(152, 152);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(105, 13);
+            this.label3.TabIndex = 2;
+            this.label3.Text = "Fees Per Credit Hour";
             // 
-            // FeePerCrdHr
+            // label2
             // 
-            this.FeePerCrdHr.Location = new System.Drawing.Point(344, 145);
-            this.FeePerCrdHr.Name = "FeePerCrdHr";
-            this.FeePerCrdHr.Size = new System.Drawing.Size(147, 20);
-            this.FeePerCrdHr.TabIndex = 5;
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(152, 92);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(82, 13);
+            this.label2.TabIndex = 1;
+            this.label2.Text = "Semester Name";
             // 
-            // noOfCrs
+            // label1
             // 
-            this.noOfCrs.Location = new System.Drawing.Point(344, 212);
-            this.noOfCrs.Name = "noOfCrs";
-            this.noOfCrs.Size = new System.Drawing.Size(147, 20);
-            this.noOfCrs.TabIndex = 6;
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(287, 25);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(73, 13);
+            this.label1.TabIndex = 0;
+            this.label1.Text = "Add Semester";
             // 
-            // addSemBtn
+            // label5
             // 
-            this.addSemBtn.Location = new System.Drawing.Point(247, 296);
-            this.addSemBtn.Name = "addSemBtn";
-            this.addSemBtn.Size = new System.Drawing.Size(113, 23);
-            this.addSemBtn.TabIndex = 7;
-            this.addSemBtn.Text = "Add Semester";
-            this.addSemBtn.UseVisualStyleBackColor = true;
-            this.addSemBtn.Click += new System.EventHandler(this.addSemBtn_Click);
+            this.label5.AutoSize = true;
+            this.label5.Location = new System.Drawing.Point(152, 263);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(76, 13);
+            this.label5.TabIndex = 8;
+            this.label5.Text = "Passing Marks";
+            // 
+            // passingMarks
+            // 
+            this.passingMarks.Location = new System.Drawing.Point(344, 256);
+            this.passingMarks.Name = "passingMarks";
+            this.passingMarks.Size = new System.Drawing.Size(147, 20);
+            this.passingMarks.TabIndex = 9;
             // 
             // CreateSemester
             // 
@@ -149,5 +169,7 @@
         private System.Windows.Forms.TextBox noOfCrs;
         private System.Windows.Forms.TextBox FeePerCrdHr;
         private System.Windows.Forms.TextBox SemName;
+        private System.Windows.Forms.TextBox passingMarks;
+        private System.Windows.Forms.Label label5;
     }
 }

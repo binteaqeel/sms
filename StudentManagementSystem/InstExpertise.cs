@@ -23,7 +23,7 @@ namespace StudentManagementSystem
 
         private void LoadChecklistItems()
         {
-            string conString = "Data Source=DESKTOP-0DG72N5\\SQLEXPRESS;Initial Catalog=smsCheck4;Integrated Security=True";
+            string conString = "Data Source=DESKTOP-0DG72N5\\SQLEXPRESS;Initial Catalog=sms;Integrated Security=True";
 
             string query = "SELECT id,crsName,crsAbr FROM courses";
 
@@ -52,7 +52,7 @@ namespace StudentManagementSystem
         {
             try
             {
-                string conString = "Data Source=DESKTOP-0DG72N5\\SQLEXPRESS;Initial Catalog=smsCheck4;Integrated Security=True";
+                string conString = "Data Source=DESKTOP-0DG72N5\\SQLEXPRESS;Initial Catalog=sms;Integrated Security=True";
 
                 using (SqlConnection connection = new SqlConnection(conString))
                 {

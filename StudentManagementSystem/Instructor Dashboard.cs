@@ -24,7 +24,7 @@ namespace StudentManagementSystem
 
             try
             {
-                string conString = "Data Source=DESKTOP-0DG72N5\\SQLEXPRESS;Initial Catalog=smsCheck4;Integrated Security=True";
+                string conString = "Data Source=DESKTOP-0DG72N5\\SQLEXPRESS;Initial Catalog=sms;Integrated Security=True";
                 SqlConnection con = new SqlConnection(conString);
                 string queryForName = "Select Fname from instructor where id = " + getId;
                 SqlCommand command = new SqlCommand(queryForName, con);
@@ -75,8 +75,7 @@ namespace StudentManagementSystem
         private void feedbackbtn_Click(object sender, EventArgs e)
         {
             Instructor_Feedback instFdbk = new Instructor_Feedback(setId, role);
-            instFdbk.Show();
-            this.Close();   
+            instFdbk.Show();  
 
         }
 
@@ -84,8 +83,13 @@ namespace StudentManagementSystem
         {
             InstExpertise exp = new InstExpertise(setId);
             exp.Show();
-            this.Close();
 
+        }
+
+        private void gradeStdBtn_Click(object sender, EventArgs e)
+        {
+            InstGrade ig = new InstGrade(setId);
+            ig.Show();
         }
     }
 }

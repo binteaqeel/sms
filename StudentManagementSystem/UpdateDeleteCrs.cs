@@ -34,7 +34,7 @@ namespace StudentManagementSystem
 
         private void updBtn_Click(object sender, EventArgs e)
         {
-            string conString = "Data Source=DESKTOP-0DG72N5\\SQLEXPRESS;Initial Catalog=smsCheck4;Integrated Security=True";
+            string conString = "Data Source=DESKTOP-0DG72N5\\SQLEXPRESS;Initial Catalog=sms;Integrated Security=True";
             SqlConnection con = new SqlConnection(conString);
 
             string updateQuery = "UPDATE courses SET crsName = @FirstName, crsAbr = @LastName, crsDesc = @DOB WHERE id = @UniqueIdentifier";
@@ -66,7 +66,7 @@ namespace StudentManagementSystem
 
         private void dltBtn_Click(object sender, EventArgs e)
         {
-            string conString = "Data Source=DESKTOP-0DG72N5\\SQLEXPRESS;Initial Catalog=smsCheck4;Integrated Security=True";
+            string conString = "Data Source=DESKTOP-0DG72N5\\SQLEXPRESS;Initial Catalog=sms;Integrated Security=True";
             SqlConnection con = new SqlConnection(conString);
 
             string updateQuery = "delete from courses WHERE id = @UniqueIdentifier";

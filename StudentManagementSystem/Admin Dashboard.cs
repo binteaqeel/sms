@@ -22,7 +22,7 @@ namespace StudentManagementSystem
             InitializeComponent();
             idShow.Text = getId;
 
-            string conString = "Data Source=DESKTOP-0DG72N5\\SQLEXPRESS;Initial Catalog=smsCheck4;Integrated Security=True";
+            string conString = "Data Source=DESKTOP-0DG72N5\\SQLEXPRESS;Initial Catalog=sms;Integrated Security=True";
             SqlConnection con = new SqlConnection(conString);
             string queryForName = "Select Fname from administration where id = " + getId;
             SqlCommand command = new SqlCommand(queryForName, con);
@@ -68,14 +68,12 @@ namespace StudentManagementSystem
         private void feedbackbtn_Click(object sender, EventArgs e)
         {
             Admin_Feedback adfdbk = new Admin_Feedback(setId, role);
-            this.Close();
             adfdbk.Show();
         }
 
         private void button1_Click(object sender, EventArgs e)
         {
             Student_Admission_Form admis = new Student_Admission_Form();
-            this.Close();
             admis.Show();
         }
 
@@ -83,13 +81,11 @@ namespace StudentManagementSystem
         {
             Add_Courses crs = new Add_Courses();
             crs.Show();
-            this.Close();
         }
 
         private void addClass_Click(object sender, EventArgs e)
         {
             AddClass ac = new AddClass();
-            this.Close();
             ac.Show();
         }
 
@@ -97,14 +93,18 @@ namespace StudentManagementSystem
         {
             CreateSemester cs = new CreateSemester();
             cs.Show();
-            this.Close();
         }
 
         private void upgStd_Click(object sender, EventArgs e)
         {
             UpgradeStds updStd = new UpgradeStds();
             updStd.Show();
-            this.Close();
+        }
+
+        private void enrollBtn_Click(object sender, EventArgs e)
+        {
+            EnrollStdPaid esp = new EnrollStdPaid();
+            esp.Show();
         }
     }
 }

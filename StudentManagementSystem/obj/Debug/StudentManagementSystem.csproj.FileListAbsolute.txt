@@ -50,3 +50,10 @@ C:\Users\My-Laptop\Desktop\SMS\StudentManagementSystem\StudentManagementSystem\o
 C:\Users\My-Laptop\Desktop\SMS\StudentManagementSystem\StudentManagementSystem\obj\Debug\StudentManagementSystem.UpgradeStds.resources
 C:\Users\My-Laptop\Desktop\SMS\StudentManagementSystem\StudentManagementSystem\obj\Debug\StudentManagementSystem.StdEnrollment.resources
 C:\Users\My-Laptop\Desktop\SMS\StudentManagementSystem\StudentManagementSystem\obj\Debug\StudentManagementSystem.PaymentBill.resources
+C:\Users\My-Laptop\Desktop\SMS\StudentManagementSystem\StudentManagementSystem\obj\Debug\StudentManagementSystem.EnrollStdPaid.resources
+C:\Users\My-Laptop\Desktop\SMS\StudentManagementSystem\StudentManagementSystem\obj\Debug\StudentManagementSystem.InstGrade.resources
+C:\Users\My-Laptop\Desktop\SMS\StudentManagementSystem\StudentManagementSystem\obj\Debug\StudentManagementSystem.AssessmentForm.resources
+C:\Users\My-Laptop\Desktop\SMS\StudentManagementSystem\StudentManagementSystem\obj\Debug\StudentManagementSystem.CreateAssessment.resources
+C:\Users\My-Laptop\Desktop\SMS\StudentManagementSystem\StudentManagementSystem\obj\Debug\StudentManagementSystem.AssessmentEvaluation.resources
+C:\Users\My-Laptop\Desktop\SMS\StudentManagementSystem\StudentManagementSystem\obj\Debug\StudentManagementSystem.ShowGrades.resources
+C:\Users\My-Laptop\Desktop\SMS\StudentManagementSystem\StudentManagementSystem\obj\Debug\StudentManagementSystem.GradeHistory.resources

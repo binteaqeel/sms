@@ -39,6 +39,7 @@
             this.addClass = new System.Windows.Forms.Button();
             this.semesterBtn = new System.Windows.Forms.Button();
             this.upgStd = new System.Windows.Forms.Button();
+            this.enrollBtn = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // LnameShow
@@ -140,17 +141,28 @@
             // 
             this.upgStd.Location = new System.Drawing.Point(211, 130);
             this.upgStd.Name = "upgStd";
-            this.upgStd.Size = new System.Drawing.Size(75, 23);
+            this.upgStd.Size = new System.Drawing.Size(112, 23);
             this.upgStd.TabIndex = 21;
             this.upgStd.Text = "Upgrade Students";
             this.upgStd.UseVisualStyleBackColor = true;
             this.upgStd.Click += new System.EventHandler(this.upgStd_Click);
+            // 
+            // enrollBtn
+            // 
+            this.enrollBtn.Location = new System.Drawing.Point(211, 187);
+            this.enrollBtn.Name = "enrollBtn";
+            this.enrollBtn.Size = new System.Drawing.Size(83, 23);
+            this.enrollBtn.TabIndex = 22;
+            this.enrollBtn.Text = "Enroll";
+            this.enrollBtn.UseVisualStyleBackColor = true;
+            this.enrollBtn.Click += new System.EventHandler(this.enrollBtn_Click);
             // 
             // Admin_Dashboard
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
+            this.Controls.Add(this.enrollBtn);
             this.Controls.Add(this.upgStd);
             this.Controls.Add(this.semesterBtn);
             this.Controls.Add(this.addClass);
@@ -183,5 +195,6 @@
         private System.Windows.Forms.Button addClass;
         private System.Windows.Forms.Button semesterBtn;
         private System.Windows.Forms.Button upgStd;
+        private System.Windows.Forms.Button enrollBtn;
     }
 }

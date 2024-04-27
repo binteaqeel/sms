@@ -23,7 +23,7 @@ namespace StudentManagementSystem
 
             try
             {
-                string conString = "Data Source=DESKTOP-0DG72N5\\SQLEXPRESS;Initial Catalog=smsCheck4;Integrated Security=True";
+                string conString = "Data Source=DESKTOP-0DG72N5\\SQLEXPRESS;Initial Catalog=sms;Integrated Security=True";
                 SqlConnection con = new SqlConnection(conString);
 
                 string queryForName = "Select Fname from students where id = " + getId;
@@ -75,7 +75,6 @@ namespace StudentManagementSystem
         {
             Student_Feedback stdFdbk = new Student_Feedback(setId, role);
             stdFdbk.Show();
-            this.Close();
 
         }
 
@@ -83,7 +82,18 @@ namespace StudentManagementSystem
         {
             StdEnrollment ef = new StdEnrollment(setId);
             ef.Show();
-            this.Close();
+        }
+
+        private void gradeBtn_Click(object sender, EventArgs e)
+        {
+            ShowGrades sg = new ShowGrades(setId);
+            sg.Show();
+        }
+
+        private void historyBtn_Click(object sender, EventArgs e)
+        {
+            GradeHistory gh = new GradeHistory(setId);
+            gh.Show();
         }
     }
 }

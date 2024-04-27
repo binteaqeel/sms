@@ -70,11 +70,35 @@
     <Compile Include="Admin Feedback.Designer.cs">
       <DependentUpon>Admin Feedback.cs</DependentUpon>
     </Compile>
+    <Compile Include="AssessmentEvaluation.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="AssessmentEvaluation.Designer.cs">
+      <DependentUpon>AssessmentEvaluation.cs</DependentUpon>
+    </Compile>
+    <Compile Include="AssessmentForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="AssessmentForm.Designer.cs">
+      <DependentUpon>AssessmentForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="CreateAssessment.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="CreateAssessment.Designer.cs">
+      <DependentUpon>CreateAssessment.cs</DependentUpon>
+    </Compile>
     <Compile Include="CreateSemester.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="CreateSemester.Designer.cs">
       <DependentUpon>CreateSemester.cs</DependentUpon>
+    </Compile>
+    <Compile Include="EnrollStdPaid.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="EnrollStdPaid.Designer.cs">
+      <DependentUpon>EnrollStdPaid.cs</DependentUpon>
     </Compile>
     <Compile Include="Feedback To Admin.cs">
       <SubType>Form</SubType>
@@ -94,11 +118,23 @@
     <Compile Include="Feedback To Student.Designer.cs">
       <DependentUpon>Feedback To Student.cs</DependentUpon>
     </Compile>
+    <Compile Include="GradeHistory.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="GradeHistory.Designer.cs">
+      <DependentUpon>GradeHistory.cs</DependentUpon>
+    </Compile>
     <Compile Include="InstExpertise.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="InstExpertise.Designer.cs">
       <DependentUpon>InstExpertise.cs</DependentUpon>
+    </Compile>
+    <Compile Include="InstGrade.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="InstGrade.Designer.cs">
+      <DependentUpon>InstGrade.cs</DependentUpon>
     </Compile>
     <Compile Include="Instructor Dashboard.cs">
       <SubType>Form</SubType>
@@ -137,6 +173,12 @@
     </Compile>
     <Compile Include="Admission Form.Designer.cs">
       <DependentUpon>Admission Form.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ShowGrades.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ShowGrades.Designer.cs">
+      <DependentUpon>ShowGrades.cs</DependentUpon>
     </Compile>
     <Compile Include="StdEnrollment.cs">
       <SubType>Form</SubType>
@@ -201,8 +243,20 @@
     <EmbeddedResource Include="Admission Form.resx">
       <DependentUpon>Admission Form.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="AssessmentEvaluation.resx">
+      <DependentUpon>AssessmentEvaluation.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="AssessmentForm.resx">
+      <DependentUpon>AssessmentForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="CreateAssessment.resx">
+      <DependentUpon>CreateAssessment.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="CreateSemester.resx">
       <DependentUpon>CreateSemester.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="EnrollStdPaid.resx">
+      <DependentUpon>EnrollStdPaid.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Feedback To Admin.resx">
       <DependentUpon>Feedback To Admin.cs</DependentUpon>
@@ -213,8 +267,14 @@
     <EmbeddedResource Include="Feedback To Student.resx">
       <DependentUpon>Feedback To Student.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="GradeHistory.resx">
+      <DependentUpon>GradeHistory.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="InstExpertise.resx">
       <DependentUpon>InstExpertise.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="InstGrade.resx">
+      <DependentUpon>InstGrade.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Instructor Dashboard.resx">
       <DependentUpon>Instructor Dashboard.cs</DependentUpon>
@@ -239,6 +299,9 @@
     </Compile>
     <EmbeddedResource Include="Show Feedback.resx">
       <DependentUpon>Show Feedback.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ShowGrades.resx">
+      <DependentUpon>ShowGrades.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="StdEnrollment.resx">
       <DependentUpon>StdEnrollment.cs</DependentUpon>

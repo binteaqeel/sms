@@ -21,9 +21,9 @@ namespace StudentManagementSystem
 
         private void addSemBtn_Click(object sender, EventArgs e)
         {
-            string conString = "Data Source=DESKTOP-0DG72N5\\SQLEXPRESS;Initial Catalog=smsCheck4;Integrated Security=True";
+            string conString = "Data Source=DESKTOP-0DG72N5\\SQLEXPRESS;Initial Catalog=sms;Integrated Security=True";
 
-            string query = "INSERT INTO semester (SemName, FeePerCrdHr, noOfCrs) VALUES (@Value1, @Value2, @Value3)";
+            string query = "INSERT INTO semester (SemName, FeePerCrdHr, noOfCrs , PassingMarks) VALUES (@Value1, @Value2, @Value3 ,@Value4)";
 
             using (SqlConnection connection = new SqlConnection(conString))
             {
@@ -32,6 +32,7 @@ namespace StudentManagementSystem
                     command.Parameters.AddWithValue("@Value1", SemName.Text);
                     command.Parameters.AddWithValue("@Value2", FeePerCrdHr.Text);
                     command.Parameters.AddWithValue("@Value3", noOfCrs.Text);
+                    command.Parameters.AddWithValue("@Value4", passingMarks.Text);
 
                     try
                     {

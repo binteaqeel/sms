@@ -35,6 +35,7 @@
             this.label1 = new System.Windows.Forms.Label();
             this.idShow = new System.Windows.Forms.Label();
             this.expertiseBtn = new System.Windows.Forms.Button();
+            this.gradeStdBtn = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // feedbackbtn
@@ -102,11 +103,22 @@
             this.expertiseBtn.UseVisualStyleBackColor = true;
             this.expertiseBtn.Click += new System.EventHandler(this.expertiseBtn_Click);
             // 
+            // gradeStdBtn
+            // 
+            this.gradeStdBtn.Location = new System.Drawing.Point(93, 232);
+            this.gradeStdBtn.Name = "gradeStdBtn";
+            this.gradeStdBtn.Size = new System.Drawing.Size(75, 23);
+            this.gradeStdBtn.TabIndex = 15;
+            this.gradeStdBtn.Text = "Grade";
+            this.gradeStdBtn.UseVisualStyleBackColor = true;
+            this.gradeStdBtn.Click += new System.EventHandler(this.gradeStdBtn_Click);
+            // 
             // Instructor_Dashboard
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
+            this.Controls.Add(this.gradeStdBtn);
             this.Controls.Add(this.expertiseBtn);
             this.Controls.Add(this.feedbackbtn);
             this.Controls.Add(this.LnameShow);
@@ -131,5 +143,6 @@
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label idShow;
         private System.Windows.Forms.Button expertiseBtn;
+        private System.Windows.Forms.Button gradeStdBtn;
     }
 }

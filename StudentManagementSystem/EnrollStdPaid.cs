@@ -11,14 +11,13 @@ using System.Windows.Forms;
 
 namespace StudentManagementSystem
 {
-    public partial class UpgradeStds : Form
+    public partial class EnrollStdPaid : Form
     {
         public string semId;
-        public UpgradeStds()
+        public EnrollStdPaid()
         {
             InitializeComponent();
             LoadSemester();
-            LoadChecklistItems();
         }
 
         private void LoadSemester()
@@ -27,7 +26,7 @@ namespace StudentManagementSystem
 
             try
             {
-                string conString = "Data Source=DESKTOP-0DG72N5\\SQLEXPRESS;Initial Catalog=sms;Integrated Security=True";
+                string conString = "Data Source=DESKTOP-0DG72N5\\SQLEXPRESS;Initial Catalog=sms1;Integrated Security=True";
                 SqlConnection con = new SqlConnection(conString);
 
                 con.Open();
@@ -55,7 +54,6 @@ namespace StudentManagementSystem
             }
         }
 
-        
         class SemesterItem
         {
             public int SemesterId { get; set; }
@@ -73,7 +71,9 @@ namespace StudentManagementSystem
             {
                 string conString = "Data Source=DESKTOP-0DG72N5\\SQLEXPRESS;Initial Catalog=sms;Integrated Security=True";
 
-                string query = "SELECT id , Fname,Lname FROM students";
+                string query = "SELECT DISTINCT sr.stdId, CONCAT(s.Fname, ' ', s.Lname) AS StudentName FROM stdClassRequest sr INNER JOIN classes c ON sr.classId = c.id INNER JOIN semester sem ON c.semId = sem.id INNER JOIN students s ON sr.stdId = s.id LEFT JOIN paidEnrollment pe ON sr.stdId = pe.stdId AND sem.id = pe.semId WHERE sem.id = "+semId+ " AND pe.id IS NULL";
+
+                viewStds.Controls.Clear();
 
                 using (SqlConnection connection = new SqlConnection(conString))
                 {
@@ -85,22 +85,36 @@ namespace StudentManagementSystem
                             while (reader.Read())
                             {
                                 CheckBox checkBox = new CheckBox();
-                                checkBox.Text = reader["id"].ToString() + "- " + reader["Fname"].ToString() + " " + reader["Lname"].ToString();
+                                checkBox.Text = reader["stdId"].ToString() + " - " + reader["StudentName"].ToString();
                                 checkBox.AutoSize = true;
 
-                                ViewStds.Controls.Add(checkBox);
+                                viewStds.Controls.Add(checkBox);
                             }
                         }
                     }
                 }
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
-                MessageBox.Show("Masle Masail \n" +ex);
+                MessageBox.Show("Masle Masail \n" + ex);
             }
         }
 
-        private void UpgStdsBtn_Click(object sender, EventArgs e)
+        private void semComboBox_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            SemesterItem selectedSemester = semComboBox.SelectedItem as SemesterItem;
+
+            if (selectedSemester != null)
+            {
+                int SemId = selectedSemester.SemesterId;
+                string semssId = SemId.ToString();
+
+                semId = semssId;
+                LoadChecklistItems();
+            }
+        }
+
+        private void enrollBtn_Click(object sender, EventArgs e)
         {
             SaveSelectedItems();
         }
@@ -115,9 +129,9 @@ namespace StudentManagementSystem
                 {
                     connection.Open();
 
-                    string deleteQuery = "DELETE FROM UpdrageStudents WHERE stdId = @studentId AND semId = @SemesterId";
+                    string deleteQuery = "DELETE FROM paidEnrollment WHERE stdId = @studentId AND semId = @SemesterId";
 
-                    foreach (Control control in ViewStds.Controls)
+                    foreach (Control control in viewStds.Controls)
                     {
                         if (control is CheckBox checkBox)
                         {
@@ -136,7 +150,7 @@ namespace StudentManagementSystem
                             }
                             else
                             {
-                                string selectQuery = "SELECT COUNT(*) FROM UpdrageStudents WHERE stdId = @studentId AND semId = @SemesterId";
+                                string selectQuery = "SELECT COUNT(*) FROM paidEnrollment WHERE stdId = @studentId AND semId = @SemesterId";
                                 using (SqlCommand selectCommand = new SqlCommand(selectQuery, connection))
                                 {
                                     selectCommand.Parameters.AddWithValue("@studentId", studentId);
@@ -145,7 +159,7 @@ namespace StudentManagementSystem
 
                                     if (count == 0)
                                     {
-                                        string insertQuery = "INSERT INTO UpdrageStudents (stdId, semId) VALUES (@studentId, @SemesterId)";
+                                        string insertQuery = "INSERT INTO paidEnrollment (stdId, semId) VALUES (@studentId, @SemesterId)";
                                         using (SqlCommand insertCommand = new SqlCommand(insertQuery, connection))
                                         {
                                             insertCommand.Parameters.AddWithValue("@studentId", studentId);
@@ -164,20 +178,6 @@ namespace StudentManagementSystem
             catch (Exception ex)
             {
                 MessageBox.Show("Masle Masail \n" + ex);
-            }
-        }
-
-
-        private void semComboBox_SelectedIndexChanged_1(object sender, EventArgs e)
-        {
-            SemesterItem selectedSemester = semComboBox.SelectedItem as SemesterItem;
-
-            if (selectedSemester != null)
-            {
-                int SemId = selectedSemester.SemesterId;
-                string semssId = SemId.ToString();
-
-                semId = semssId;
             }
         }
     }

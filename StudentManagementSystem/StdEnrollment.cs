@@ -28,9 +28,9 @@ namespace StudentManagementSystem
         {
             try
             {
-                string conString = "Data Source=DESKTOP-0DG72N5\\SQLEXPRESS;Initial Catalog=smsCheck4;Integrated Security=True";
+                string conString = "Data Source=DESKTOP-0DG72N5\\SQLEXPRESS;Initial Catalog=sms;Integrated Security=True";
 
-                string query = "SELECT c.crsName, cl.id AS class_id FROM UpdrageStudents us JOIN classes cl ON us.semId = cl.semId JOIN courses c ON cl.crsId = c.id WHERE us.stdId = " + setId;
+                string query = "SELECT \r\n    DISTINCT cl.id AS classId,\r\n    c.crsName AS CourseName\r\nFROM \r\n    classes cl\r\nINNER JOIN \r\n    courses c ON cl.crsId = c.id\r\nLEFT JOIN \r\n    resultStatus rs ON cl.id = rs.classId AND rs.stdId = "+setId+"\r\nINNER JOIN \r\n    (SELECT stdId, MAX(semId) AS semId FROM UpdrageStudents GROUP BY stdId) us ON cl.semId = us.semId\r\nWHERE \r\n    rs.statuss IS NULL OR rs.statuss != 'PASS';\r\n";
 
                 viewCourses.Controls.Clear();
 
@@ -44,7 +44,7 @@ namespace StudentManagementSystem
                             while (reader.Read())
                             {
                                 CheckBox checkBox = new CheckBox();
-                                checkBox.Text = reader["class_id"].ToString() + " - " + reader["crsName"].ToString();
+                                checkBox.Text = reader["classId"].ToString() + " - " + reader["CourseName"].ToString();
                                 checkBox.AutoSize = true;
 
                                 viewCourses.Controls.Add(checkBox);
@@ -63,7 +63,7 @@ namespace StudentManagementSystem
         {
             try
             {
-                string conString = "Data Source=DESKTOP-0DG72N5\\SQLEXPRESS;Initial Catalog=smsCheck4;Integrated Security=True";
+                string conString = "Data Source=DESKTOP-0DG72N5\\SQLEXPRESS;Initial Catalog=sms;Integrated Security=True";
                 SqlConnection con = new SqlConnection(conString);
 
                 string queryForcorses = "SELECT s.noOfCrs FROM UpdrageStudents us JOIN semester s ON us.semId = s.id WHERE us.stdId = " + setId;

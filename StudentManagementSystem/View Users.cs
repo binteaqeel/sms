@@ -29,7 +29,7 @@ namespace StudentManagementSystem
             setRole = getRole;
             InitializeComponent();
 
-            string conString = "Data Source=DESKTOP-0DG72N5\\SQLEXPRESS;Initial Catalog=smsCheck4;Integrated Security=True";
+            string conString = "Data Source=DESKTOP-0DG72N5\\SQLEXPRESS;Initial Catalog=sms;Integrated Security=True";
             using (SqlConnection con = new SqlConnection(conString))
             {
 
