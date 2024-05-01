@@ -24,12 +24,14 @@ namespace StudentManagementSystem
         public string adres;
         public string pasword;
         public string confirmPassword;
+        public string conString;
+        Connection conc = new Connection();
         public View_Users(string getRole)
         {
             setRole = getRole;
             InitializeComponent();
+            conString = conc.conStrings;
 
-            string conString = "Data Source=DESKTOP-0DG72N5\\SQLEXPRESS;Initial Catalog=sms;Integrated Security=True";
             using (SqlConnection con = new SqlConnection(conString))
             {
 

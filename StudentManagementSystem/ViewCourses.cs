@@ -21,11 +21,13 @@ namespace StudentManagementSystem
         public string crsName;
         public string crsAbr;
         public string crsDesc;
+        public string conString;
+        Connection conc = new Connection();
         public ViewCourses()
         {
             InitializeComponent();
+            conString = conc.conStrings;
 
-            string conString = "Data Source=DESKTOP-0DG72N5\\SQLEXPRESS;Initial Catalog=sms;Integrated Security=True";
             using (SqlConnection con = new SqlConnection(conString))
             {
                 try

@@ -15,15 +15,18 @@ namespace StudentManagementSystem
     {
         public string role = "student";
         public string setId;
+
+        public string conString;
+        Connection conc = new Connection();
         public Student_Dashboard(string getId)
         {
             setId = getId;
             InitializeComponent();
+            conString = conc.conStrings;
             idShow.Text = getId;
 
             try
             {
-                string conString = "Data Source=DESKTOP-0DG72N5\\SQLEXPRESS;Initial Catalog=sms;Integrated Security=True";
                 SqlConnection con = new SqlConnection(conString);
 
                 string queryForName = "Select Fname from students where id = " + getId;

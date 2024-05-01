@@ -17,6 +17,8 @@ namespace StudentManagementSystem
         public string setCrsName;
         public string setCrsAbr;
         public string setCrsDesc;
+        public string conString;
+        Connection conc = new Connection();
 
         public UpdateDeleteCrs(string getCrsId , string getCrsName , string getCrsAbr , string CrsDesc)
         {
@@ -26,6 +28,7 @@ namespace StudentManagementSystem
             setCrsDesc = CrsDesc;
 
             InitializeComponent();
+            conString = conc.conStrings;
 
             InputFname.Text = setCrsName;
             InputLname.Text = setCrsAbr;
@@ -34,7 +37,6 @@ namespace StudentManagementSystem
 
         private void updBtn_Click(object sender, EventArgs e)
         {
-            string conString = "Data Source=DESKTOP-0DG72N5\\SQLEXPRESS;Initial Catalog=sms;Integrated Security=True";
             SqlConnection con = new SqlConnection(conString);
 
             string updateQuery = "UPDATE courses SET crsName = @FirstName, crsAbr = @LastName, crsDesc = @DOB WHERE id = @UniqueIdentifier";
@@ -66,8 +68,7 @@ namespace StudentManagementSystem
 
         private void dltBtn_Click(object sender, EventArgs e)
         {
-            string conString = "Data Source=DESKTOP-0DG72N5\\SQLEXPRESS;Initial Catalog=sms;Integrated Security=True";
-            SqlConnection con = new SqlConnection(conString);
+           SqlConnection con = new SqlConnection(conString);
 
             string updateQuery = "delete from courses WHERE id = @UniqueIdentifier";
 

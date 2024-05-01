@@ -14,9 +14,12 @@ namespace StudentManagementSystem
     public partial class EnrollStdPaid : Form
     {
         public string semId;
+        public string conString;
+        Connection conc = new Connection();
         public EnrollStdPaid()
         {
             InitializeComponent();
+            conString = conc.conStrings;
             LoadSemester();
         }
 
@@ -26,7 +29,6 @@ namespace StudentManagementSystem
 
             try
             {
-                string conString = "Data Source=DESKTOP-0DG72N5\\SQLEXPRESS;Initial Catalog=sms1;Integrated Security=True";
                 SqlConnection con = new SqlConnection(conString);
 
                 con.Open();
@@ -69,8 +71,7 @@ namespace StudentManagementSystem
         {
             try
             {
-                string conString = "Data Source=DESKTOP-0DG72N5\\SQLEXPRESS;Initial Catalog=sms;Integrated Security=True";
-
+                
                 string query = "SELECT DISTINCT sr.stdId, CONCAT(s.Fname, ' ', s.Lname) AS StudentName FROM stdClassRequest sr INNER JOIN classes c ON sr.classId = c.id INNER JOIN semester sem ON c.semId = sem.id INNER JOIN students s ON sr.stdId = s.id LEFT JOIN paidEnrollment pe ON sr.stdId = pe.stdId AND sem.id = pe.semId WHERE sem.id = "+semId+ " AND pe.id IS NULL";
 
                 viewStds.Controls.Clear();
@@ -123,8 +124,7 @@ namespace StudentManagementSystem
         {
             try
             {
-                string conString = "Data Source=DESKTOP-0DG72N5\\SQLEXPRESS;Initial Catalog=sms;Integrated Security=True";
-
+                
                 using (SqlConnection connection = new SqlConnection(conString))
                 {
                     connection.Open();

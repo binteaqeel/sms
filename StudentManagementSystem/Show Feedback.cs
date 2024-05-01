@@ -16,11 +16,14 @@ namespace StudentManagementSystem
     {
         public string setId;
         public string setRole;
+        public string conString;
+        Connection conc = new Connection();
         public Show_Feedback(string getId, string role)
         {
             setRole = role;
             setId = getId;
             InitializeComponent();
+            conString = conc.conStrings;
             this.ShowData();
         }
 
@@ -28,6 +31,7 @@ namespace StudentManagementSystem
         {
             setId = getId;
             InitializeComponent();
+            conString = conc.conStrings;
             this.ShowAdminData();
         }
 
@@ -35,12 +39,16 @@ namespace StudentManagementSystem
         {
             try
             {
-                string conString = "Data Source=DESKTOP-0DG72N5\\SQLEXPRESS;Initial Catalog=sms;Integrated Security=True";
                 using (SqlConnection con = new SqlConnection(conString))
                 {
                     Table1Hd.Text = "Feedback From Students To Instructors";
                     Table2Hd.Text = "Feedbacks From Instructors To Students";
-                    string query1 = "SELECT \r\n    f.fdbkDesc AS FeedbackDescription,\r\n    s.Fname AS StudentFirstName,\r\n    s.Lname AS StudentLastName,\r\n    s.id AS StudentID,\r\n    i.Fname AS InstructorFirstName,\r\n    i.Lname AS InstructorLastName,\r\n    i.id AS InstructorID\r\nFROM \r\n    instFeedbackForStudent f\r\nJOIN \r\n    students s ON f.stdId = s.id\r\nJOIN \r\n    instructor i ON f.instId = i.id;";
+                    string query1 = "SELECT \r\n    f.fdbkDesc AS FeedbackDescription,\r\n    " +
+                        "s.Fname AS StudentFirstName,\r\n    s.Lname AS StudentLastName,\r\n   " +
+                        " s.id AS StudentID,\r\n    i.Fname AS InstructorFirstName,\r\n    " +
+                        "i.Lname AS InstructorLastName,\r\n    i.id AS InstructorID\r\nFROM \r\n    " +
+                        "instFeedbackForStudent f\r\nJOIN \r\n    students s ON f.stdId = s.id\r\nJOIN \r\n   " +
+                        " instructor i ON f.instId = i.id;";
                     using (SqlCommand cmd = new SqlCommand(query1, con))
                     {
                         cmd.CommandType = CommandType.Text;
@@ -79,7 +87,6 @@ namespace StudentManagementSystem
         {
             try
             {
-                string conString = "Data Source=DESKTOP-0DG72N5\\SQLEXPRESS;Initial Catalog=sms;Integrated Security=True";
                 using (SqlConnection con = new SqlConnection(conString))
                 {
                     if (setRole == "admin")

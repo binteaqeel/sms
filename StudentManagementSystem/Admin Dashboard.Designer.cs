@@ -40,6 +40,7 @@
             this.semesterBtn = new System.Windows.Forms.Button();
             this.upgStd = new System.Windows.Forms.Button();
             this.enrollBtn = new System.Windows.Forms.Button();
+            this.timeTableBtn = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // LnameShow
@@ -157,11 +158,22 @@
             this.enrollBtn.UseVisualStyleBackColor = true;
             this.enrollBtn.Click += new System.EventHandler(this.enrollBtn_Click);
             // 
+            // timeTableBtn
+            // 
+            this.timeTableBtn.Location = new System.Drawing.Point(211, 241);
+            this.timeTableBtn.Name = "timeTableBtn";
+            this.timeTableBtn.Size = new System.Drawing.Size(75, 23);
+            this.timeTableBtn.TabIndex = 23;
+            this.timeTableBtn.Text = "Time Table";
+            this.timeTableBtn.UseVisualStyleBackColor = true;
+            this.timeTableBtn.Click += new System.EventHandler(this.timeTableBtn_Click);
+            // 
             // Admin_Dashboard
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
+            this.Controls.Add(this.timeTableBtn);
             this.Controls.Add(this.enrollBtn);
             this.Controls.Add(this.upgStd);
             this.Controls.Add(this.semesterBtn);
@@ -196,5 +208,6 @@
         private System.Windows.Forms.Button semesterBtn;
         private System.Windows.Forms.Button upgStd;
         private System.Windows.Forms.Button enrollBtn;
+        private System.Windows.Forms.Button timeTableBtn;
     }
 }

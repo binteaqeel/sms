@@ -29,6 +29,9 @@ namespace StudentManagementSystem
 
         public string fileRoleName;
 
+        public string conString;
+        Connection conc = new Connection();
+
 
         public UpdateDeleteUsers(string getRole, string getId, string getFname, string getLname, string getDOB, string getGender, string getEmail, string getPhoneNumber, string getAdres, string getPas, string getConPass)
         {
@@ -46,6 +49,7 @@ namespace StudentManagementSystem
             setConPass = getConPass;
 
             InitializeComponent();
+            conString = conc.conStrings;
             InputRole.Text = setRole;
             InputFname.Text = setFname;
             InputLname.Text = setLname;
@@ -79,7 +83,6 @@ namespace StudentManagementSystem
 
         private void updateBtn_Click(object sender, EventArgs e)
         {
-            string conString = "Data Source=DESKTOP-0DG72N5\\SQLEXPRESS;Initial Catalog=sms;Integrated Security=True";
             SqlConnection con = new SqlConnection(conString);
 
             string gender;
@@ -340,7 +343,6 @@ namespace StudentManagementSystem
 
         private void deleteBtn_Click(object sender, EventArgs e)
         {
-            string conString = "Data Source=DESKTOP-0DG72N5\\SQLEXPRESS;Initial Catalog=sms;Integrated Security=True";
             SqlConnection con = new SqlConnection(conString);
 
             if(setRole == "std")

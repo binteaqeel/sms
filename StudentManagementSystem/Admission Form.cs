@@ -13,9 +13,12 @@ namespace StudentManagementSystem
 {
     public partial class Student_Admission_Form : Form
     {
+        public string conString;
+        Connection conc = new Connection();
         public Student_Admission_Form()
         {
             InitializeComponent();
+            conString = conc.conStrings;
         }
 
         private void submitBtn_Click(object sender, EventArgs e)
@@ -50,7 +53,6 @@ namespace StudentManagementSystem
                 }
                 else
                 {
-                    string conString = "Data Source=DESKTOP-0DG72N5\\SQLEXPRESS;Initial Catalog=sms;Integrated Security=True";
                     SqlConnection con = new SqlConnection(conString);
 
                     if (InputRole.Text == "Student")

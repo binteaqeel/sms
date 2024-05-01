@@ -14,17 +14,19 @@ namespace StudentManagementSystem
     public partial class InstExpertise : Form
     {
         public string SetId;
+        public string conString;
+        Connection conc = new Connection();
         public InstExpertise(string getId)
         {
             SetId = getId;
             InitializeComponent();
+            conString = conc.conStrings;
             LoadChecklistItems();
         }
 
         private void LoadChecklistItems()
         {
-            string conString = "Data Source=DESKTOP-0DG72N5\\SQLEXPRESS;Initial Catalog=sms;Integrated Security=True";
-
+            
             string query = "SELECT id,crsName,crsAbr FROM courses";
 
             using (SqlConnection connection = new SqlConnection(conString))
@@ -52,8 +54,7 @@ namespace StudentManagementSystem
         {
             try
             {
-                string conString = "Data Source=DESKTOP-0DG72N5\\SQLEXPRESS;Initial Catalog=sms;Integrated Security=True";
-
+                
                 using (SqlConnection connection = new SqlConnection(conString))
                 {
                     connection.Open();

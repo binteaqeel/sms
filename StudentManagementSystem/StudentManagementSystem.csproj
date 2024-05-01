@@ -82,6 +82,8 @@
     <Compile Include="AssessmentForm.Designer.cs">
       <DependentUpon>AssessmentForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="Connection.cs" />
+    <Compile Include="ConnectionString.cs" />
     <Compile Include="CreateAssessment.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -93,6 +95,12 @@
     </Compile>
     <Compile Include="CreateSemester.Designer.cs">
       <DependentUpon>CreateSemester.cs</DependentUpon>
+    </Compile>
+    <Compile Include="CrerateTimeTableEnviroment.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="CrerateTimeTableEnviroment.Designer.cs">
+      <DependentUpon>CrerateTimeTableEnviroment.cs</DependentUpon>
     </Compile>
     <Compile Include="EnrollStdPaid.cs">
       <SubType>Form</SubType>
@@ -254,6 +262,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="CreateSemester.resx">
       <DependentUpon>CreateSemester.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="CrerateTimeTableEnviroment.resx">
+      <DependentUpon>CrerateTimeTableEnviroment.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="EnrollStdPaid.resx">
       <DependentUpon>EnrollStdPaid.cs</DependentUpon>

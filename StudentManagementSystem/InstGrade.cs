@@ -15,10 +15,13 @@ namespace StudentManagementSystem
     {
         public string setId;
         public string ClasssId;
+        public string conString;
+        Connection conc = new Connection();
         public InstGrade(string getId)
         {
             setId = getId;
             InitializeComponent();
+            conString = conc.conStrings;
             LoadClasses();
         }
 
@@ -28,12 +31,13 @@ namespace StudentManagementSystem
 
             try
             {
-                string conString = "Data Source=DESKTOP-0DG72N5\\SQLEXPRESS;Initial Catalog=sms;Integrated Security=True";
-                SqlConnection con = new SqlConnection(conString);
+               SqlConnection con = new SqlConnection(conString);
 
                 con.Open();
 
-                SqlCommand cmd = new SqlCommand("SELECT c.id AS classId, crsName FROM classes c JOIN courses cr ON c.crsId = cr.id WHERE c.instId = " + setId, con);
+                SqlCommand cmd = new SqlCommand("SELECT c.id AS classId, crsName \r\nFROM classes c \r\nJOIN courses" +
+                    " cr ON c.crsId = cr.id \r\nWHERE c.instId = "+setId+" \r\nAND c.id NOT IN (SELECT classId FROM " +
+                    "expiredClasses);\r\n", con);
 
                 SqlDataReader dr = cmd.ExecuteReader();
 

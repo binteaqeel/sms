@@ -14,9 +14,12 @@ namespace StudentManagementSystem
     public partial class UpgradeStds : Form
     {
         public string semId;
+        public string conString;
+        Connection conc = new Connection();
         public UpgradeStds()
         {
             InitializeComponent();
+            conString = conc.conStrings;
             LoadSemester();
             LoadChecklistItems();
         }
@@ -27,7 +30,6 @@ namespace StudentManagementSystem
 
             try
             {
-                string conString = "Data Source=DESKTOP-0DG72N5\\SQLEXPRESS;Initial Catalog=sms;Integrated Security=True";
                 SqlConnection con = new SqlConnection(conString);
 
                 con.Open();
@@ -71,8 +73,7 @@ namespace StudentManagementSystem
         {
             try
             {
-                string conString = "Data Source=DESKTOP-0DG72N5\\SQLEXPRESS;Initial Catalog=sms;Integrated Security=True";
-
+                
                 string query = "SELECT id , Fname,Lname FROM students";
 
                 using (SqlConnection connection = new SqlConnection(conString))
@@ -109,8 +110,7 @@ namespace StudentManagementSystem
         {
             try
             {
-                string conString = "Data Source=DESKTOP-0DG72N5\\SQLEXPRESS;Initial Catalog=sms;Integrated Security=True";
-
+                
                 using (SqlConnection connection = new SqlConnection(conString))
                 {
                     connection.Open();

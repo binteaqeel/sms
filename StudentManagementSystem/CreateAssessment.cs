@@ -15,11 +15,14 @@ namespace StudentManagementSystem
     {
         public string setId;
         public string setClassId;
+        public string conString;
+        Connection conc = new Connection();
         public CreateAssessment(string getId , string getClassId)
         {
             setId = getId;
             setClassId = getClassId;
             InitializeComponent();
+            conString = conc.conStrings;
         }
 
         private void createBtn_Click(object sender, EventArgs e)
@@ -37,8 +40,7 @@ namespace StudentManagementSystem
             }
             else
             {
-                string conString = "Data Source=DESKTOP-0DG72N5\\SQLEXPRESS;Initial Catalog=sms;Integrated Security=True";
-
+                
                 string query = "INSERT INTO AssessmentType (AssessmentName, AssessDesc, totalMarks,HOdate,SubDate,classId) VALUES (@Value1, @Value2, @Value3 ,@Value4,@Value5,@Value6)";
 
                 using (SqlConnection connection = new SqlConnection(conString))

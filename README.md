@@ -251,38 +251,176 @@ CREATE TABLE resultStatus(
 );
 
 select * from resultStatus;
+
 ----------------------------------------------------------------------------------------------------------------Hogaya hal
 
+--show all ClassIds and courseName from classes and course of the  semester of semId  to which the student of  stdId = 10 has the highest semId from semester table in upgradeStudent table 
+
 SELECT 
-    DISTINCT cl.id AS classId,
-    c.crsName AS CourseName
+    c.id AS ClassId,
+    crs.crsName AS CourseName
 FROM 
-    classes cl
+    classes c
 INNER JOIN 
-    courses c ON cl.crsId = c.id
-LEFT JOIN 
-    resultStatus rs ON cl.id = rs.classId AND rs.stdId = 10
+    courses crs ON c.crsId = crs.id
 INNER JOIN 
-    (SELECT stdId, MAX(semId) AS semId FROM UpdrageStudents WHERE stdId = 10 GROUP BY stdId) us ON cl.semId = us.semId
+    UpdrageStudents us ON c.semId = us.semId
 WHERE 
-    (rs.statuss IS NULL OR rs.statuss != 'PASS')
-    OR
-    (rs.statuss = 'PASS' AND cl.crsId NOT IN 
-        (SELECT cl2.crsId 
-         FROM resultStatus rs2
-         INNER JOIN classes cl2 ON rs2.classId = cl2.id
-         WHERE rs2.stdId = 10 AND rs2.statuss = 'PASS'
-           AND cl2.id <> cl.id)
-    )
-    AND cl.id NOT IN (
-        SELECT cl3.id
-        FROM classes cl3
-        INNER JOIN resultStatus rs3 ON cl3.id = rs3.classId
-        WHERE rs3.stdId = 10 AND rs3.statuss = 'PASS'
-    )
-    AND cl.crsId NOT IN (
-        SELECT DISTINCT cl4.crsId
-        FROM resultStatus rs4
-        INNER JOIN classes cl4 ON rs4.classId = cl4.id
-        WHERE rs4.stdId = 10 AND rs4.statuss = 'PASS'
-    );
+    us.stdId = 10
+    AND c.semId = (SELECT MAX(semId) FROM UpdrageStudents WHERE stdId = 10);
+
+---------------------------------------------------------------------------------------------
+--to show all the classes
+SELECT
+    c.id AS ClassId,
+    crs.crsName AS CourseName
+FROM
+    classes c
+INNER JOIN
+    courses crs ON c.crsId = crs.id;
+
+--------------------------------------------------------------------------------------------------
+SELECT
+    c.id AS ClassId,
+    crs.crsName AS CourseName
+FROM
+    classes c
+INNER JOIN
+    courses crs ON c.crsId = crs.id
+INNER JOIN
+    resultStatus rs ON c.id = rs.classId
+WHERE
+    rs.stdId = 10
+    AND rs.statuss = 'PASS';
+
+------------------------------------------------------------------------------------------------------------
+SELECT
+    A.ClassId,
+    A.CourseName
+FROM
+    (
+    SELECT
+        c.id AS ClassId,
+        crs.crsName AS CourseName
+    FROM
+        classes c
+    INNER JOIN
+        courses crs ON c.crsId = crs.id
+    ) AS A
+LEFT JOIN
+    (
+    SELECT
+        c.id AS ClassId,
+        crs.crsName AS CourseName
+    FROM
+        classes c
+    INNER JOIN
+        courses crs ON c.crsId = crs.id
+    INNER JOIN
+        resultStatus rs ON c.id = rs.classId
+    WHERE
+        rs.stdId = 10
+        AND rs.statuss = 'PASS'
+    ) AS B ON A.CourseName = B.CourseName
+WHERE
+    B.ClassId IS NULL;
+
+--------------------------------------------------------------------------------------------
+--final query
+SELECT 
+    C.ClassId,
+    C.CourseName
+FROM 
+    (
+    SELECT 
+        c.id AS ClassId,
+        crs.crsName AS CourseName
+    FROM 
+        classes c
+    INNER JOIN 
+        courses crs ON c.crsId = crs.id
+    INNER JOIN 
+        UpdrageStudents us ON c.semId = us.semId
+    WHERE 
+        us.stdId = 10
+        AND c.semId = (SELECT MAX(semId) FROM UpdrageStudents WHERE stdId = 10)
+    ) AS C
+INNER JOIN
+    (
+    SELECT
+        A.ClassId,
+        A.CourseName
+    FROM
+        (
+        SELECT
+            c.id AS ClassId,
+            crs.crsName AS CourseName
+        FROM
+            classes c
+        INNER JOIN
+            courses crs ON c.crsId = crs.id
+        ) AS A
+    LEFT JOIN
+        (
+        SELECT
+            c.id AS ClassId,
+            crs.crsName AS CourseName
+        FROM
+            classes c
+        INNER JOIN
+            courses crs ON c.crsId = crs.id
+        INNER JOIN
+            resultStatus rs ON c.id = rs.classId
+        WHERE
+            rs.stdId = 10
+            AND rs.statuss = 'PASS'
+        ) AS B ON A.CourseName = B.CourseName
+    WHERE
+        B.ClassId IS NULL
+    ) AS D ON C.ClassId = D.ClassId AND C.CourseName = D.CourseName;
+
+
+create table expiredClasses(
+	id int primary key identity,
+	classId int,
+	foreign key (classId) references classes(id)
+);
+
+select * from expiredClasses;
+
+create table timeTableEnviroment (
+	id int primary key identity,
+	semId int,
+	foreign key (semId) references semester(id),
+	noOfWeeks int,
+	hrPerClass int,
+	startTimeTableFrom date
+);
+
+select * from timeTableEnviroment;
+
+drop table timeTableEnviroment;
+
+
+create table timeTable(
+	id int primary key identity,
+	ttEnvId int,
+	foreign key (ttEnvId) references timeTableEnviroment(id),
+	dayOfTheWeek varchar(50),
+	periodNumb int,
+	classId int,
+	foreign key (classId) references classes(id),
+	classroomId int,
+	foreign key (classroomId) references classroom(id)
+);
+
+select * from timeTable;
+
+drop table timetable;
+
+create table classroom(
+	id int primary key identity,
+	className varchar(255) unique
+);
+
+drop table classroom;

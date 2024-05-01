@@ -15,11 +15,14 @@ namespace StudentManagementSystem
     {
         public string setId;
         public string NoOfCrses;
+        public string conString;
+        Connection conc = new Connection();
         public StdEnrollment(string getId)
         {
             setId = getId;
             
             InitializeComponent();
+            conString = conc.conStrings;
             LoadChecklistItems();
 
         }
@@ -28,9 +31,26 @@ namespace StudentManagementSystem
         {
             try
             {
-                string conString = "Data Source=DESKTOP-0DG72N5\\SQLEXPRESS;Initial Catalog=sms;Integrated Security=True";
-
-                string query = "SELECT \r\n    DISTINCT cl.id AS classId,\r\n    c.crsName AS CourseName\r\nFROM \r\n    classes cl\r\nINNER JOIN \r\n    courses c ON cl.crsId = c.id\r\nLEFT JOIN \r\n    resultStatus rs ON cl.id = rs.classId AND rs.stdId = "+setId+"\r\nINNER JOIN \r\n    (SELECT stdId, MAX(semId) AS semId FROM UpdrageStudents GROUP BY stdId) us ON cl.semId = us.semId\r\nWHERE \r\n    rs.statuss IS NULL OR rs.statuss != 'PASS';\r\n";
+                
+                string query = "SELECT \r\n    C.ClassId,\r\n    C.CourseName\r\nFROM \r\n    (\r\n    " +
+                    "SELECT \r\n        c.id AS ClassId,\r\n        crs.crsName AS CourseName\r\n   " +
+                    " FROM \r\n        classes c\r\n    INNER JOIN \r\n        courses crs ON c.crsId " +
+                    "= crs.id\r\n    INNER JOIN \r\n        UpdrageStudents us ON c.semId = us.semId\r\n" +
+                    "    WHERE \r\n        us.stdId = "+setId+"\r\n        AND c.semId = (SELECT MAX(semId) FROM" +
+                    " UpdrageStudents WHERE stdId = "+setId+")\r\n    ) AS C\r\nINNER JOIN\r\n    (\r\n    " +
+                    "SELECT\r\n        A.ClassId,\r\n        A.CourseName\r\n    FROM\r\n     " +
+                    "   (\r\n        SELECT\r\n            c.id AS ClassId,\r\n           " +
+                    " crs.crsName AS CourseName\r\n        FROM\r\n            classes c\r\n  " +
+                    "      INNER JOIN\r\n            courses crs ON c.crsId = crs.id\r\n      " +
+                    "  ) AS A\r\n    LEFT JOIN\r\n        (\r\n        SELECT\r\n          " +
+                    "  c.id AS ClassId,\r\n            crs.crsName AS CourseName\r\n       " +
+                    " FROM\r\n            classes c\r\n        INNER JOIN\r\n            courses crs" +
+                    " ON c.crsId = crs.id\r\n        INNER JOIN\r\n            " +
+                    "resultStatus rs ON c.id = rs.classId\r\n        WHERE\r\n         " +
+                    "   rs.stdId = "+setId+"\r\n            AND rs.statuss = 'PASS'\r\n        " +
+                    ") AS B ON A.CourseName = B.CourseName\r\n    WHERE\r\n       " +
+                    " B.ClassId IS NULL\r\n    ) AS D ON C.ClassId = D.ClassId AND C.CourseName " +
+                    "= D.CourseName;\r\n";
 
                 viewCourses.Controls.Clear();
 
@@ -63,7 +83,6 @@ namespace StudentManagementSystem
         {
             try
             {
-                string conString = "Data Source=DESKTOP-0DG72N5\\SQLEXPRESS;Initial Catalog=sms;Integrated Security=True";
                 SqlConnection con = new SqlConnection(conString);
 
                 string queryForcorses = "SELECT s.noOfCrs FROM UpdrageStudents us JOIN semester s ON us.semId = s.id WHERE us.stdId = " + setId;
@@ -81,54 +100,64 @@ namespace StudentManagementSystem
                     }
                 }
 
-
                 reader.Close();
                 command.Dispose();
-                
 
                 int checkedCount = viewCourses.Controls.OfType
-                <CheckBox>()
+
+
+                    <CheckBox>()
                 .Count(cb => cb.Checked);
                 int numberOfCourses = int.Parse(NoOfCrses);
                 if (checkedCount == numberOfCourses)
                 {
                     string deleteQuery = "DELETE FROM stdClassRequest WHERE stdId = @studentId AND classId = @classId";
 
+                    List<string> selectedCourses = new List<string>();
+
                     foreach (Control control in viewCourses.Controls)
                     {
-                        if (control is CheckBox checkBox)
+                        if (control is CheckBox checkBox && checkBox.Checked)
                         {
                             string itemName = checkBox.Text;
                             int index = itemName.IndexOf('-');
                             string classesId = itemName.Substring(0, index).Trim();
-                            if (!checkBox.Checked)
+                            string courseName = itemName.Substring(index + 1).Trim();
+
+                            if (selectedCourses.Contains(courseName))
                             {
-                                using (SqlCommand deleteCommand = new SqlCommand(deleteQuery, con))
-                                {
-                                    deleteCommand.Parameters.AddWithValue("@studentId", setId);
-                                    deleteCommand.Parameters.AddWithValue("@classId", classesId);
-                                    deleteCommand.ExecuteNonQuery();
-                                }
+                                MessageBox.Show("Select only one class for each course!");
+                                return;
                             }
-                            else {
-                                string selectQuery = "SELECT COUNT(*) FROM stdClassRequest WHERE stdId = @studentId AND classId = @classId";
-                                using (SqlCommand selectCommand = new SqlCommand(selectQuery, con))
+                            else
+                            {
+                                selectedCourses.Add(courseName);
+                            }
+
+                            using (SqlCommand deleteCommand = new SqlCommand(deleteQuery, con))
+                            {
+                                deleteCommand.Parameters.AddWithValue("@studentId", setId);
+                                deleteCommand.Parameters.AddWithValue("@classId", classesId);
+                                deleteCommand.ExecuteNonQuery();
+                            }
+
+                            string selectQuery = "SELECT COUNT(*) FROM stdClassRequest WHERE stdId = @studentId AND classId = @classId";
+                            using (SqlCommand selectCommand = new SqlCommand(selectQuery, con))
+                            {
+                                selectCommand.Parameters.AddWithValue("@studentId", setId);
+                                selectCommand.Parameters.AddWithValue("@classId", classesId);
+
+                                int count = Convert.ToInt32(selectCommand.ExecuteScalar());
+
+                                if (count == 0)
                                 {
-                                    selectCommand.Parameters.AddWithValue("@studentId", setId);
-                                    selectCommand.Parameters.AddWithValue("@classId", classesId);
-
-                                    int count = Convert.ToInt32(selectCommand.ExecuteScalar());
-
-                                    if (count == 0)
+                                    string insertQuery = "INSERT INTO stdClassRequest (stdId, classId) VALUES (@studentId, @classId)";
+                                    using (SqlCommand insertCommand = new SqlCommand(insertQuery, con))
                                     {
-                                        string insertQuery = "INSERT INTO stdClassRequest (stdId, classId) VALUES (@studentId, @classId)";
-                                        using (SqlCommand insertCommand = new SqlCommand(insertQuery, con))
-                                        {
-                                            insertCommand.Parameters.AddWithValue("@studentId", setId);
-                                            insertCommand.Parameters.AddWithValue("@classId", classesId);
+                                        insertCommand.Parameters.AddWithValue("@studentId", setId);
+                                        insertCommand.Parameters.AddWithValue("@classId", classesId);
 
-                                            insertCommand.ExecuteNonQuery();
-                                        }
+                                        insertCommand.ExecuteNonQuery();
                                     }
                                 }
                             }
@@ -147,9 +176,11 @@ namespace StudentManagementSystem
             }
             catch (Exception ex)
             {
-                MessageBox.Show("masle Masail \n" + ex);
+                MessageBox.Show("Masle Masail \n" + ex);
             }
+        }
+            
             
         }
     }
-}
+

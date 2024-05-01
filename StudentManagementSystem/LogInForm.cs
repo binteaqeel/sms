@@ -14,15 +14,17 @@ namespace StudentManagementSystem
 {
     public partial class LogInForm : Form
     {
+        public string conString;
+        Connection conc = new Connection();
         public LogInForm()
         {
             InitializeComponent();
+            conString = conc.conStrings;
         }
 
         private void logInbtn_Click(object sender, EventArgs e)
         {
-            string conString = "Data Source=DESKTOP-0DG72N5\\SQLEXPRESS;Initial Catalog=sms;Integrated Security=True";
-            try
+           try
             {
                 SqlConnection con = new SqlConnection(conString);
                 con.Open();

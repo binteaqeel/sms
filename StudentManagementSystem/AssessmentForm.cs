@@ -9,11 +9,14 @@ namespace StudentManagementSystem
     {
         public string setId;
         public string setClassId;
+        public string conString;
+        Connection conc = new Connection();
         public AssessmentForm(string getId, string getClassId)
         {
             setId = getId;
             setClassId = getClassId;
             InitializeComponent();
+            conString = conc.conStrings;
         }
 
         private void button52_Click(object sender, EventArgs e)
@@ -48,8 +51,7 @@ namespace StudentManagementSystem
         {
             try
             {
-                string conString = "Data Source=DESKTOP-0DG72N5\\SQLEXPRESS;Initial Catalog=sms;Integrated Security=True";
-
+               
                 using (SqlConnection connection = new SqlConnection(conString))
                 {
                     connection.Open();
@@ -71,9 +73,21 @@ namespace StudentManagementSystem
                         command.Parameters.AddWithValue("@classId", classId);
                         command.ExecuteNonQuery();
                     }
-
-                    MessageBox.Show("Hogayyyyyyaaaaaaaa");
                 }
+
+                using (SqlConnection connection = new SqlConnection(conString))
+                {
+                    connection.Open();
+
+                    string query = "insert into expiredClasses (classId) values (@classId)";
+
+                    using (SqlCommand command = new SqlCommand(query, connection))
+                    {
+                        command.Parameters.AddWithValue("@classId", classId);
+                        command.ExecuteNonQuery();
+                    }
+                }
+                MessageBox.Show("Hogayaaaa");
             }
             catch (Exception ex)
             {

@@ -11,15 +11,17 @@ using System.Windows.Forms;
 
 namespace StudentManagementSystem
 {
-    public partial class GradeHistory : Form
+    public partial class GradeHistory : Form 
     {
+        public string conString;
+        Connection conc = new Connection();
         public GradeHistory(string getId)
         {
             InitializeComponent();
+            conString = conc.conStrings;
 
             try
             {
-                string conString = "Data Source=DESKTOP-0DG72N5\\SQLEXPRESS;Initial Catalog=sms;Integrated Security=True";
                 using (SqlConnection con = new SqlConnection(conString))
                 {
 

@@ -14,15 +14,17 @@ namespace StudentManagementSystem
 {
     public partial class CreateSemester : Form
     {
+        public string conString;
+        Connection conc = new Connection();
         public CreateSemester()
         {
             InitializeComponent();
+            conString = conc.conStrings;
         }
 
         private void addSemBtn_Click(object sender, EventArgs e)
         {
-            string conString = "Data Source=DESKTOP-0DG72N5\\SQLEXPRESS;Initial Catalog=sms;Integrated Security=True";
-
+            
             string query = "INSERT INTO semester (SemName, FeePerCrdHr, noOfCrs , PassingMarks) VALUES (@Value1, @Value2, @Value3 ,@Value4)";
 
             using (SqlConnection connection = new SqlConnection(conString))

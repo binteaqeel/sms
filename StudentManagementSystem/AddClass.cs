@@ -14,9 +14,12 @@ namespace StudentManagementSystem
 {
     public partial class AddClass : Form
     {
+        public string conString;
+        Connection conc = new Connection();
         public AddClass()
         {
             InitializeComponent();
+            conString = conc.conStrings;
             LoadCourses();
             LoadSemester();
         }
@@ -25,8 +28,7 @@ namespace StudentManagementSystem
         {
             try
             {
-                string conString = "Data Source=DESKTOP-0DG72N5\\SQLEXPRESS;Initial Catalog=sms;Integrated Security=True";
-
+                
                 string query = "SELECT crsName FROM courses";
 
                 using (SqlConnection connection = new SqlConnection(conString))
@@ -54,8 +56,7 @@ namespace StudentManagementSystem
         {
             try
             {
-                string conString = "Data Source=DESKTOP-0DG72N5\\SQLEXPRESS;Initial Catalog=sms;Integrated Security=True";
-
+               
                 string query = "SELECT SemName FROM semester";
 
                 using (SqlConnection connection = new SqlConnection(conString))
@@ -92,8 +93,7 @@ namespace StudentManagementSystem
             {
                 InstComboBox.Items.Clear();
 
-                string conString = "Data Source=DESKTOP-0DG72N5\\SQLEXPRESS;Initial Catalog=sms;Integrated Security=True";
-
+                
                 string selectedCourse = CrsComboBox.SelectedItem.ToString();
                 string query = "SELECT i.Fname\r\nFROM instructor i\r\nJOIN InstExpertise ie ON i.id = ie.instId\r\nJOIN courses c ON ie.crsId = c.id\r\nWHERE c.crsName = @CourseName;\r\n";
 
@@ -138,8 +138,7 @@ namespace StudentManagementSystem
                     MessageBox.Show("Garbarrr");
                 }
 
-                string conString = "Data Source=DESKTOP-0DG72N5\\SQLEXPRESS;Initial Catalog=sms;Integrated Security=True";
-
+               
                 string selectedCourse = CrsComboBox.SelectedItem.ToString();
                 string selectedInstructor = InstComboBox.SelectedItem.ToString();
                 string selestedSemester = SemComboBox.SelectedItem.ToString();

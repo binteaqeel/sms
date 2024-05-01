@@ -13,9 +13,12 @@ namespace StudentManagementSystem
 {
     public partial class Add_Courses : Form
     {
+        public string conString;
+        Connection conc = new Connection();
         public Add_Courses()
         {
             InitializeComponent();
+            conString = conc.conStrings;
         }
 
         private void addCrsBtn_Click(object sender, EventArgs e)
@@ -28,7 +31,6 @@ namespace StudentManagementSystem
                 }
                 else
                 {
-                    string conString = "Data Source=DESKTOP-0DG72N5\\SQLEXPRESS;Initial Catalog=sms;Integrated Security=True";
                     SqlConnection con = new SqlConnection(conString);
 
                     string query = "insert into courses (crsName,crsAbr,crsDesc) values ('" + InputFname.Text + "','" + InputLname.Text + "','" + InputEmail.Text + "')";

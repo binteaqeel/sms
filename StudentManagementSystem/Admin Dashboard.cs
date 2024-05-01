@@ -16,13 +16,14 @@ namespace StudentManagementSystem
     {
         public string role = "admin";
         public string setId;
+        public string conString;
+        Connection conc = new Connection();
         public Admin_Dashboard(string getId)
         {
             setId = getId;
             InitializeComponent();
+            conString = conc.conStrings;
             idShow.Text = getId;
-
-            string conString = "Data Source=DESKTOP-0DG72N5\\SQLEXPRESS;Initial Catalog=sms;Integrated Security=True";
             SqlConnection con = new SqlConnection(conString);
             string queryForName = "Select Fname from administration where id = " + getId;
             SqlCommand command = new SqlCommand(queryForName, con);
@@ -105,6 +106,11 @@ namespace StudentManagementSystem
         {
             EnrollStdPaid esp = new EnrollStdPaid();
             esp.Show();
+        }
+
+        private void timeTableBtn_Click(object sender, EventArgs e)
+        {
+            
         }
     }
 }

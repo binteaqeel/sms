@@ -13,12 +13,16 @@ namespace StudentManagementSystem
 {
     public partial class ShowGrades : Form
     {
+
         public string setId;
         public string ClasssId;
+        public string conString;
+        Connection conc = new Connection();
         public ShowGrades(string getId)
         {
             setId = getId;
             InitializeComponent();
+            conString = conc.conStrings;
             LoadClasses();
         }
 
@@ -28,7 +32,6 @@ namespace StudentManagementSystem
 
             try
             {
-                string conString = "Data Source=DESKTOP-0DG72N5\\SQLEXPRESS;Initial Catalog=sms;Integrated Security=True";
                 SqlConnection con = new SqlConnection(conString);
 
                 con.Open();
@@ -80,7 +83,6 @@ namespace StudentManagementSystem
 
                 try
                 {
-                    string conString = "Data Source=DESKTOP-0DG72N5\\SQLEXPRESS;Initial Catalog=sms;Integrated Security=True";
                     using (SqlConnection con = new SqlConnection(conString))
                     {
 
@@ -108,7 +110,7 @@ namespace StudentManagementSystem
                     MessageBox.Show("Masle Masaill!! \n" + ex);
                 }
 
-                }
+            }
         }
     }
 }

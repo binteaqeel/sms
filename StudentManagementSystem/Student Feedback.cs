@@ -14,11 +14,14 @@ namespace StudentManagementSystem
     {
         public string setId;
         public string setRole;
+        public string conString;
+        Connection conc = new Connection();
         public Student_Feedback(string getId , string role)
         {
             setRole = role;
             setId = getId;
             InitializeComponent();
+            conString = conc.conStrings;
         }
 
         private void stdFdbkToInst_Click(object sender, EventArgs e)

@@ -16,11 +16,14 @@ namespace StudentManagementSystem
         public string setId;
         public string setClassId;
         public string AssesssId;
+        public string conString;
+        Connection conc = new Connection();
         public AssessmentEvaluation(string getId , string getClassId)
         {
             setId = getId;
             setClassId = getClassId;
             InitializeComponent();
+            conString = conc.conStrings;
             LoadAssessmentType();
         }
 
@@ -30,7 +33,6 @@ namespace StudentManagementSystem
 
             try
             {
-                string conString = "Data Source=DESKTOP-0DG72N5\\SQLEXPRESS;Initial Catalog=sms;Integrated Security=True";
                 SqlConnection con = new SqlConnection(conString);
 
                 con.Open();
@@ -87,7 +89,6 @@ namespace StudentManagementSystem
         {
             try
             {
-                string conString = "Data Source=DESKTOP-0DG72N5\\SQLEXPRESS;Initial Catalog=sms;Integrated Security=True";
                 SqlConnection con = new SqlConnection(conString);
 
                 con.Open();
@@ -150,7 +151,6 @@ namespace StudentManagementSystem
         {
             try
             {
-                string conString = "Data Source=DESKTOP-0DG72N5\\SQLEXPRESS;Initial Catalog=sms;Integrated Security=True";
                 SqlConnection con = new SqlConnection(conString);
 
                 con.Open();

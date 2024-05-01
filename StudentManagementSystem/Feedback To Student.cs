@@ -15,11 +15,14 @@ namespace StudentManagementSystem
     {
         public string setId;
         public string setRole;
+        public string conString;
+        Connection conc = new Connection();
         public Feedback_To_Student(string getId, string role)
         {
             setRole = role;
             setId = getId;
             InitializeComponent();
+            conString = conc.conStrings;
         }
 
         private void SubmitFdbkBtn_Click(object sender, EventArgs e)
@@ -28,8 +31,7 @@ namespace StudentManagementSystem
             {
                 try
                 {
-                    string conString = "Data Source=DESKTOP-0DG72N5\\SQLEXPRESS;Initial Catalog=sms;Integrated Security=True";
-                    SqlConnection con = new SqlConnection(conString);
+                     SqlConnection con = new SqlConnection(conString);
 
                     if (stdName.Text == "" || stdFdbkDesc.Text == "")
                     {
@@ -55,7 +57,6 @@ namespace StudentManagementSystem
             {
                 try
                 {
-                    string conString = "Data Source=DESKTOP-0DG72N5\\SQLEXPRESS;Initial Catalog=sms;Integrated Security=True";
                     SqlConnection con = new SqlConnection(conString);
 
                     if (stdName.Text == "" || stdFdbkDesc.Text == "")
